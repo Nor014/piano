@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Задача 1. Пианино | Домашнее задание к лекции 2.1</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+  <ul class="set middle">
+    <li class="white">
+      <audio src=""></audio>
+    </li>
+    <li class="black">
+      <audio src=""></audio>
+    </li>
+    <li class="white">
+      <audio src=""></audio>
+    </li>
+    <li class="black">
+      <audio src=""></audio>
+    </li>
+    <li class="white">
+      <audio src=""></audio>
+    </li>
+  </ul>
+  <script>
+
+    let player = document.getElementsByTagName('audio')[0];
+    let pianoKey = document.getElementsByTagName('li');
+    let style = document.getElementsByClassName("set middle")[0];
+
+    let middleSound = ['sounds/middle/first.mp3', 'sounds/middle/second.mp3', 'sounds/middle/third.mp3', 'sounds/middle/fourth.mp3', 'sounds/middle/fifth.mp3'];
+    let higherSound = ['sounds/higher/first.mp3', 'sounds/higher/second.mp3', 'sounds/higher/third.mp3', 'sounds/higher/fourth.mp3', 'sounds/higher/fifth.mp3'];
+    let lowerSound = ['sounds/lower/first.mp3', 'sounds/lower/second.mp3', 'sounds/lower/third.mp3', 'sounds/lower/fourth.mp3', 'sounds/lower/fifth.mp3'];
+
+    for (let i = 0; i < pianoKey.length; i++) {
+      pianoKey[i].addEventListener('click', function play() {
+        if (event.altKey) {
+          player.src = higherSound[i];
+          player.play()
+        } else if (event.shiftKey) {
+          player.src = lowerSound[i];
+          player.play()
+        } else {
+          player.src = middleSound[i];
+          player.play()
+        }
+      })
+    }
+
+    document.addEventListener('keydown', function changeClass() {
+      if (event.altKey) style.classList.add('higher');
+      if (event.shiftKey) style.classList.add('lower');
+    })
+
+    document.addEventListener('keyup', function changeClass() {
+      if (!event.altKey) style.classList.remove('higher');
+      if (!event.shiftKey) style.classList.remove('lower');
+    })
+
+  </script>
+
+</body>
+
+</html>
